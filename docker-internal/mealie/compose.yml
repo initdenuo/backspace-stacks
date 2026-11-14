@@ -14,8 +14,8 @@ services:
       PGID: 1000
       TZ: America/New_York
       BASE_URL: https://mealie.bkspc.cc
-      SMTP_HOST: smtp.startmail.com
-      SMTP_PORT: 465
+      SMTP_HOST: smtp.protonmail.ch
+      SMTP_PORT: 587
       SMTP_AUTH_STRATEGY: SSL
       SMTP_USER: ${SMTP_USER}
       SMTP_PASSWORD: ${SMTP_PASSWORD}
