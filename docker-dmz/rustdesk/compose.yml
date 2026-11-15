@@ -1,0 +1,28 @@
+services:
+  hbbs:
+    image: rustdesk/rustdesk-server:latest
+    container_name: rustdesk-hbbs
+    command: hbbs -r rd.bkspc.cc:21117
+    restart: unless-stopped
+    depends_on:
+      - hbbr
+    environment:
+      ENCRYPTED_ONLY: "1"
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+    volumes:
+      - /opt/docker/rustdesk:/root
+
+  hbbr:
+    image: rustdesk/rustdesk-server:latest
+    container_name: rustdesk-hbbr
+    command: hbbr
+    restart: unless-stopped
+    environment:
+      ENCRYPTED_ONLY: "1"
+    ports:
+      - 21117:21117
+    volumes:
+      - /opt/docker/rustdesk:/root
