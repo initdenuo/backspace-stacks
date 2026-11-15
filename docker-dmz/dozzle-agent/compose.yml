@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     environment:
       DOZZLE_HOSTNAME: docker-dmz
+      DOZZLE_CERT_PEM: ${DOZZLE_CERT_PEM}
     ports:
       - 7007:7007
     volumes:
