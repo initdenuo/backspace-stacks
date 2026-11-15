@@ -1,0 +1,9 @@
+services:
+  denuo-sh:
+    image: nginx:alpine
+    container_name: denuo-sh
+    restart: unless-stopped
+    ports:
+      - 8095:80
+    volumes:
+      - /mnt/data/denuo-sh/html:/usr/share/nginx/html:ro
