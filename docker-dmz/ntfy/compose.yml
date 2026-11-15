@@ -1,0 +1,20 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command: serve
+    restart: unless-stopped
+    environment:
+      TZ: America/New_York
+      NTFY_BASE_URL: https://ntfy.bkspc.cc
+      NTFY_BEHIND_PROXY: "true"
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+      NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
+      NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_ENABLE_LOGIN: "true"
+    volumes:
+      - /opt/docker/ntfy/cache:/var/cache/ntfy
+      - /opt/docker/ntfy/lib:/var/lib/ntfy
+    ports:
+      - 8093:80
