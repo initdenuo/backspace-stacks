@@ -12,3 +12,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt/data/dozzle:/data
+      - /mnt/data/dozzle/agent_cert.pem:/dozzle_cert.pem:ro
+      - /mnt/data/dozzle/agent_key.pem:/dozzle_key.pem:ro
