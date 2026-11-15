@@ -1,0 +1,29 @@
+services:
+  n8n-init:
+    image: busybox
+    command: chown -R 1000:1000 /data
+    volumes:
+      - /mnt/data/n8n:/data
+    restart: "no"
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+    depends_on:
+      n8n-init:
+        condition: service_completed_successfully
+    environment:
+      N8N_HOST: n8n.bkspc.cc
+      N8N_PROTOCOL: https
+      N8N_PORT: 5678
+      WEBHOOK_URL: https://n8n.bkspc.cc/
+      N8N_PROXY_HOPS: 1
+      GENERIC_TIMEZONE: America/New_York
+      TZ: America/New_York
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+    ports:
+      - 5678:5678
+    volumes:
+      - /mnt/data/n8n:/home/node/.n8n
