@@ -1,0 +1,27 @@
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:15
+    container_name: forgejo
+    restart: unless-stopped
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__server__DOMAIN=git.bkspc.cc
+      - FORGEJO__server__ROOT_URL=https://git.bkspc.cc/
+      - FORGEJO__server__SSH_DOMAIN=git-ssh.bkspc.cc
+      - FORGEJO__server__SSH_PORT=2222
+      - FORGEJO__database__DB_TYPE=sqlite3
+      - FORGEJO__service__DISABLE_REGISTRATION=true
+      - FORGEJO__service__REQUIRE_SIGNIN_VIEW=true
+    volumes:
+      - /mnt/data/forgejo:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3030:3000"
+      - "2222:22"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
